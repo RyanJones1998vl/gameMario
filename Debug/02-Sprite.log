@@ -1,0 +1,9 @@
+﻿  main.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Utils.cpp
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(61,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(87,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(117,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(120,19): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  02-Sprite.vcxproj -> C:\Users\ngoho\Desktop\gamedev-intro-tutorials\Debug\02-Sprite.exe
