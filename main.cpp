@@ -93,8 +93,8 @@ void LoadResources()
 	
 
 	CAnimations * animations = CAnimations::GetInstance();
-	LPANIMATION ani;
-
+	animations->AddMario();
+	/*
 	ani = new CAnimation(100);
 	ani->Add(17);
 	ani->Add(18);
@@ -103,7 +103,7 @@ void LoadResources()
 	ani = new CAnimation(100);
 	ani->Add(10019);
 	ani->Add(10020);
-	animations->Add(501, ani);
+	animations->Add(501, ani);*/
 
 	/*
 	ani = new CAnimation(100);

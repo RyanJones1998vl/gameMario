@@ -30,6 +30,7 @@ class CSprites
 {
 	static CSprites * __instance;
 
+public:
 	unordered_map<int, LPSPRITE> sprites;
 
 public:
@@ -65,6 +66,7 @@ class CAnimation
 {
 	DWORD lastFrameTime;
 	int defaultTime;
+public:
 	int currentFrame;
 	vector<LPANIMATION_FRAME> frames;
 public:
@@ -87,8 +89,6 @@ public:
 	LPANIMATION getDump();
 
 	static CAnimations * GetInstance();
-
-private:
 	void AddMario();
 };
 

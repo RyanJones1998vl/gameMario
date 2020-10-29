@@ -1,9 +1,8 @@
-﻿  main.cpp
+﻿  Mario.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  Utils.cpp
-C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(61,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(87,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(117,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Utils.cpp(120,19): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Mario.cpp(61,8): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Mario.cpp(61,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Mario.cpp(63,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Mario.cpp(63,14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\ngoho\Desktop\gamedev-intro-tutorials\02-Sprite\Mario.cpp(172,7): warning C4804: '>': unsafe use of type 'bool' in operation
   02-Sprite.vcxproj -> C:\Users\ngoho\Desktop\gamedev-intro-tutorials\Debug\02-Sprite.exe

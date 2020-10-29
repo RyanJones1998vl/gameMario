@@ -7,7 +7,7 @@ void CKeyHandler::OnKeyDown(int KeyCode)
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		CMario::getInstance()->SetState(MARIO_STATE_JUMP);
+		CMario::getInstance()->setStates(STATE_MARIO_JUMP);
 		break;
 	}
 }
@@ -20,10 +20,12 @@ void CKeyHandler::OnKeyUp(int KeyCode)
 void CKeyHandler::KeyState(BYTE* states)
 {
 	if (CGame::GetInstance()->IsKeyDown(DIK_RIGHT))
-		CMario::getInstance()->SetState(MARIO_STATE_WALKING_RIGHT);
+		CMario::getInstance()->setStates(STATE_MARIO_WALK, MARIO_TO_RIGHT);
 	else if (CGame::GetInstance()->IsKeyDown(DIK_LEFT))
-		CMario::getInstance()->SetState(MARIO_STATE_WALKING_LEFT);
-	else CMario::getInstance()->SetState(MARIO_STATE_IDLE);
+		CMario::getInstance()->setStates(STATE_MARIO_WALK, MARIO_TO_LEFT);
+	else if (CGame::GetInstance()->IsKeyDown(DIK_SPACE))
+		CMario::getInstance()->setStates(STATE_MARIO_JUMP);
+	else CMario::getInstance()->setStates(STATE_MARIO_STAND);
 }
 CKeyHandler* CKeyHandler::getInstance() {
 	if (instance == NULL) {

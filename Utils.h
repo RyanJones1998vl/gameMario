@@ -3,6 +3,7 @@
 #include <sstream> 
 #include <vector>
 #include "Constants.h"
+#include <math.h>
 using namespace std;
 
 class Utils {
@@ -21,5 +22,8 @@ public:
 	static void analyseAxesForEnemies(string line,int* objId, int* top, int* bottom, vector<int>* left, vector<int>* right);
 	static int getSpriteId(bool toRight, int objID, int id, int atLine = 0);
 	static int getAnimationId(bool toRight, int objID, int state, int form=0);
+	static void alignAnimationPosition(int* x, int* y);
+	static float getAcceleratedSpeed(float currentSpeed, float acclerator, float target);
+	static bool equalTo(float num1, float num2);
 };
 

@@ -136,5 +136,30 @@ int Utils::getSpriteId(bool toRight, int objID, int id, int atLine) {
 	return toRight * 100000 + objID * 1000 + atLine * 100 + id;
 }
 int Utils::getAnimationId(bool toRight, int objID, int state, int form) {
+	int _12;
+	if ((toRight * 10000 + objID * 1000 + form * 100 + state) == 10016)
+		_12 = toRight * 10000 + objID * 1000 + form * 100 + state;
 	return toRight * 10000 + objID * 1000 + form * 100 + state;
+}
+void Utils::alignAnimationPosition(int* x, int* y) {
+	
+}
+float Utils::getAcceleratedSpeed(float currentSpeed, float acclerator, float target) {
+	if (target > currentSpeed) {
+		currentSpeed += acclerator;
+		if (currentSpeed > target) currentSpeed = target;
+	} 
+	else if (target <= currentSpeed){
+		currentSpeed -= acclerator;
+		if (currentSpeed < target) currentSpeed = target;
+	}
+	return currentSpeed;
+}
+bool Utils::equalTo(float num1, float num2) {
+	float delta;
+	if (num2 < 0) {
+		delta = abs(num1 - num2);
+	}
+	
+	return abs(num1 - num2) < MEANINGLESS_BOUNDARY;
 }

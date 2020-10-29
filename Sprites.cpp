@@ -45,7 +45,7 @@ LPSPRITE CSprites::GetDump()
 void CSprites::Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex)
 {
 	if (sprites.count(id)>0) {
-		OutputDebugString(L"[PARA_ERROR] Csprites::Add() : id already exists;");
+		DebugOut(L"[PARA_ERROR] Csprites::Add() : id %d already exists; \n", id);
 		return;
 	}
 	else {
@@ -69,7 +69,7 @@ void CSprites::AddForMario(string textPath, LPDIRECT3DTEXTURE9 tex) {
 		/*	getline(file, line);
 			Utils().analyseXAxis(line, &left, &right);*/
 			for (int i = 0;i < left.size();i++) {
-				id = i < left.size() / 2 ? (left.size() / 2 - i) : (i - left.size() / 2);
+				id = i < left.size() / 2 ? (left.size() / 2 - i) : (i - left.size() / 2 +1);
 				spId = Utils::getSpriteId(left[i]< TEX_LEFT_CENTER_MARIO, SPR_OO_MARIO, id, atLine);
 				CSprites::GetInstance()->Add(spId, left[i], top, right[i], bottom, tex);
 			}
@@ -136,7 +136,7 @@ void CAnimation::Render(float x, float y)
 		}
 		
 	}
-
+	//DebugOut(L"now: %d, lastFrameTime: %d, t: \n", currentFrame, lastFrameTime);
 	frames[currentFrame]->GetSprite()->Draw(x, y);
 }
 
@@ -178,24 +178,24 @@ void CAnimations::AddMario() {
 
 		ani = new CAnimation(100);
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 2));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_WALK, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 4));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 5));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 5, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_RUN, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_JUMP, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STOP, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 11));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 11, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_KICK, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
@@ -203,42 +203,47 @@ void CAnimations::AddMario() {
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STAND, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD_RUN, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 18));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 18, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_DIE, FORM_MARIO_SMALL), ani);
 		
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 12));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 12, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_SLIDE, FORM_MARIO_SMALL), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 6));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 6, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_QUICK_JUMP, FORM_MARIO_SMALL), ani);
 
+		ani = new CAnimation(100);
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 5, 1));
+		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_LANDING, FORM_MARIO_SMALL), ani);
+
 		// Form BIG
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 2));
+		ani = new CAnimation(100);
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 3));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 3));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 2));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_WALK, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 6));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 7));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 8));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 6, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 8, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_RUN, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 5));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 5, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_JUMP, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
@@ -246,249 +251,249 @@ void CAnimations::AddMario() {
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_LANDING, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STOP, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 16));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 16, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_KICK, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STAND, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 13));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 13, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 13));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 14));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 15));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 14));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 13, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 14, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 15, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 14, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD_RUN, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 17));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 17, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_SLIDE, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_QUICK_JUMP, FORM_MARIO_BIG), ani);
 
 		// Form FIRE
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 2));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 3));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 2));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_WALK, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 6));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 6, 7));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 7));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 8));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 8, 7));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_RUN, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 5));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 5, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_JUMP, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_LANDING, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STOP, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 16));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 16, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_KICK, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STAND, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 13));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 13, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 13));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 14));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 15));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 14));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 13, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 14, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 15, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 14, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD_RUN, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 17));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 17, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_SLIDE, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_QUICK_JUMP, FORM_MARIO_FIRE), ani);
 		
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 8, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 8, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 8));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 8));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_ATTACK, FORM_MARIO_FIRE), ani);
 
 		// Form Racoon
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 2));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 3));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 2));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_WALK, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 8));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 8, 9));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 9));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_RUN, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 5));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 5, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_JUMP, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_JUMP, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 14));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 14, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STOP, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 4));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 10));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_KICK, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_STAND, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 10));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 2));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 3));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 2));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 10));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 2, 10));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_HOLD_RUN, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 10, 5));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 5, 10));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_SLIDE, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 11));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 11, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_QUICK_JUMP, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 11));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 12));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 13));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 12));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 11, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 12, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 13, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 12, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_FLY, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 16));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 15));
-		ani->Add(Utils::getSpriteId(!toRight, SPR_OO_MARIO, 9, 16));
-		ani->Add(Utils::getSpriteId(!toRight, SPR_OO_MARIO, 9, 17));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 16));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 16, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 15, 9));
+		ani->Add(Utils::getSpriteId(!toRight, SPR_OO_MARIO, 16, 9));
+		ani->Add(Utils::getSpriteId(!toRight, SPR_OO_MARIO, 17, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 16, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_ATTACK, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 11));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 12));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 13));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 12));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 11, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 12, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 13, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 12, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_FLOAT, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 6));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 6, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_START_FLOATING, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_BIG, FORM_MARIO_SMALL), ani);
 		
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 4, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 4));
 		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 1));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_SMALL, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_FIRE, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_RACOON, FORM_MARIO_BIG), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 7, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 7));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_FIRE, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 9, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 9));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_RACOON, FORM_MARIO_FIRE), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_BIG, FORM_MARIO_RACOON), ani);
 
 		ani = new CAnimation(100);
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
-		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 3, 1));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
+		ani->Add(Utils::getSpriteId(toRight, SPR_OO_MARIO, 1, 3));
 		CAnimations::GetInstance()->Add(Utils::getAnimationId(toRight, SPR_OO_MARIO, STATE_MARIO_TRANSFORM_TO_BIG, FORM_MARIO_FIRE), ani);
 	}
 	
