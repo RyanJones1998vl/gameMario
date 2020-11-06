@@ -1,7 +1,10 @@
 #pragma once
 
 #include "GameObject.h"
-
+#include "CEnemy.h"
+#include "Obstacle.h"
+#include "CItem.h"
+#include "debug.h"
 #define MARIO_WIDTH 14
 
 class CMario : public CGameObject
@@ -11,6 +14,12 @@ private:
 	int form;
 	bool direction;
 	int jumpCount, jumpGap;
+	int untouchable;
+	int transition;
+	int kick;
+	int from_form;
+	bool sudden_stop;
+	CTurtle* turtle;
 protected:
 private:
 public:
@@ -25,4 +34,9 @@ public:
 	int getForm() { return form; }
 	int getDirection() { return direction; }
 	static CMario * getInstance();
+	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void getDamaged();
+	bool notTransforming();
+	void setTurtle(CTurtle* tt) { this->turtle = tt; }
+
 };

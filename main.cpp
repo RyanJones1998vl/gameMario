@@ -19,7 +19,9 @@
 #include "Textures.h"
 #include "Mario.h"
 #include "KeyHandler.h"
-
+#include "CEnemy.h"
+#include "Obstacle.h"
+#include"CItem.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"02 - Sprite animation"
@@ -29,14 +31,13 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
-#define MAX_FRAME_RATE 30
+#define MAX_FRAME_RATE 15
 
 #define ID_TEX_MARIO 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
 
 CMario *mario;
-
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -61,6 +62,9 @@ void LoadResources()
 
 	textures->Add(TEX_ID_MARIO, L"textures\\mario_player.png", D3DCOLOR_XRGB(TEX_MARIO_RED, TEX_MARIO_GREEN, TEX_MARIO_BLUE));
 	textures->Add(TEX_ID_ENEMIES, L"textures\\enemies.png", D3DCOLOR_XRGB(TEX_MARIO_RED, TEX_MARIO_GREEN, TEX_MARIO_BLUE));
+	textures->Add(TEX_ID_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(TEX_ID_TILES, L"textures\\tiles.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(TEX_ID_ITEMS, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
 
 	//textures->Add(TEX_ID_MARIO, L"textures\\mario_player.png", D3DCOLOR_XRGB(0, 0, 0));
 
@@ -70,12 +74,15 @@ void LoadResources()
 
 	CSprites * sprites = CSprites::GetInstance();
 	
-	LPDIRECT3DTEXTURE9 texMario = textures->Get(TEX_ID_MARIO);
-	LPDIRECT3DTEXTURE9 texEnemies = textures->Get(TEX_ID_ENEMIES);
-
+	LPDIRECT3DTEXTURE9 tex = textures->Get(TEX_ID_MARIO);
+	sprites->AddForMario("texts\\mario_player.txt", tex);
+	tex = textures->Get(TEX_ID_ENEMIES);
+	sprites->AddForEnemies("texts\\enemies.txt", tex);
+	tex = textures->Get(TEX_ID_TILES);
+	sprites->AddForTiles("texts\\enemies.txt", tex);
+	tex = textures->Get(TEX_ID_ITEMS);
+	sprites->AddForItems(tex);
 	// readline => id, left, top, right 
-	sprites->AddForMario("texts\\mario_player.txt", texMario);
-	sprites->AddForEnemies("texts\\enemies.txt", texEnemies);
 
 	/*sprites->Add(10001, 246, 154, 259, 181, texMario);
 	sprites->Add(10002, 275, 154, 290, 181, texMario);
@@ -94,6 +101,9 @@ void LoadResources()
 
 	CAnimations * animations = CAnimations::GetInstance();
 	animations->AddMario();
+	animations->AddEnemies();
+	animations->AddTiles();
+	animations->AddItems();
 	/*
 	ani = new CAnimation(100);
 	ani->Add(17);
@@ -115,6 +125,8 @@ void LoadResources()
 	*/
 	mario = new CMario(MARIO_START_X, MARIO_START_Y, MARIO_START_VX);
 	mario = CMario::getInstance();
+	//CEnemies::generateEnemies();
+	CObstacles::generateObstacles();
 }
 
 /*
@@ -124,6 +136,8 @@ void LoadResources()
 void Update(DWORD dt)
 {
 	mario->Update(dt);
+	CEnemies::Update(dt);
+	CItems::Update(dt);
 }
 
 /*
@@ -144,8 +158,11 @@ void Render()
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
 		mario->Render();
+		CEnemies::Render();
+		CObstacles::Render();
+		CItems::Render();
 
-		DebugOutTitle(L"02 - Sprite %0.1f %0.1f", mario->GetX(), mario->GetY());
+		DebugOutTitle(L"02 - Sprite %f %0.1f", mario->GetX(), mario->GetY());
 
 		//
 		// TEST SPRITE DRAW
@@ -247,7 +264,7 @@ int Run()
 		{
 			frameStart = now;
 			CGame::GetInstance()->ProcessKeyboard();
-			Update(dt);
+			Update(78);
 			Render();
 		}
 		else

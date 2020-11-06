@@ -16,6 +16,19 @@ vector<int> Utils::extractIntegers(string line) {
 	}
 	return out;
 }
+int Utils::getTileId(int row, int col, int* left, int* top, int* right, int* bottom, int scale) {
+	*left = (col) * TILE_SQUARE_MEASURE + 1;
+	*right = *left + TILE_SQUARE_MEASURE*scale-1;
+	*top = (row) * TILE_SQUARE_MEASURE + 1;
+	*bottom = *top + TILE_SQUARE_MEASURE * scale-1;
+	return 200000 + row * 100 + col;
+}
+int Utils::getTileId(int row, int col) {
+	return 200000 + row * 100 + col;
+}
+int Utils::getItemId(int objectId, int index) {
+	return 300000 + objectId * 100 + index;
+}
 //void Utils::analyseXAxis(string line, vector<int> *left, vector<int> *right) {
 //	vector<int> l, r;
 //	vector<int> integers = extractIntegers(line);
@@ -87,7 +100,7 @@ void Utils::analyseAxesForEnemies(string line, int* objId, int* top, int* bottom
 	for (int i = 4;i < integers.size();i++) {
 		l.push_back(ls + TEX_RIGHT_CENTER_ENEMIES);
 		r.push_back(ls + integers[i] + TEX_RIGHT_CENTER_ENEMIES);
-		ls = ls + integers[i] + 2;
+		ls = ls + integers[i];
 	}
 	left->clear(); right->clear();
 	left->insert(left->begin(), l.begin(), l.end());
@@ -132,10 +145,10 @@ void Utils::reflexXAxis(vector<int> *left, vector<int>* right, int right_center,
 vector<int> Utils::getMarioStates() {
 	return marioStates;
 }
-int Utils::getSpriteId(bool toRight, int objID, int id, int atLine) {
+int Utils::getSpriteId(int toRight, int objID, int id, int atLine) {
 	return toRight * 100000 + objID * 1000 + atLine * 100 + id;
 }
-int Utils::getAnimationId(bool toRight, int objID, int state, int form) {
+int Utils::getAnimationId(int toRight, int objID, int state, int form) {
 	int _12;
 	if ((toRight * 10000 + objID * 1000 + form * 100 + state) == 10016)
 		_12 = toRight * 10000 + objID * 1000 + form * 100 + state;

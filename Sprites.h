@@ -18,7 +18,7 @@ class CSprite
 public: 
 	CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex);
 
-	void Draw(float x, float y);
+	void Draw(float x, float y, int alpha = 255);
 };
 
 typedef CSprite * LPSPRITE;
@@ -43,7 +43,8 @@ public:
 	// Modification
 	void AddForMario(string textPath, LPDIRECT3DTEXTURE9 tex);
 	void AddForEnemies(string textPath, LPDIRECT3DTEXTURE9 tex);
-
+	void AddForTiles(string textPath, LPDIRECT3DTEXTURE9 tex);
+	void AddForItems(LPDIRECT3DTEXTURE9 tex);
 };
 
 /*
@@ -68,11 +69,12 @@ class CAnimation
 	int defaultTime;
 public:
 	int currentFrame;
+	int id;
 	vector<LPANIMATION_FRAME> frames;
 public:
 	CAnimation(int defaultTime) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
 	void Add(int spriteId, DWORD time = 0);
-	void Render(float x, float y);
+	void Render(float x, float y, int alpha = 255);
 };
 
 typedef CAnimation *LPANIMATION;
@@ -90,5 +92,8 @@ public:
 
 	static CAnimations * GetInstance();
 	void AddMario();
+	void AddEnemies();
+	void AddTiles();
+	void AddItems();
 };
 

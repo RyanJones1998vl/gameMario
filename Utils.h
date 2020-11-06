@@ -20,10 +20,13 @@ public:
 	static vector<int> getMarioStates();
 	static void analyseAxesForMario(string line, int* atLine, int* top, int* bottom, vector<int>* left, vector<int>* right);
 	static void analyseAxesForEnemies(string line,int* objId, int* top, int* bottom, vector<int>* left, vector<int>* right);
-	static int getSpriteId(bool toRight, int objID, int id, int atLine = 0);
-	static int getAnimationId(bool toRight, int objID, int state, int form=0);
+	static int getSpriteId(int toRight, int objID, int id, int atLine = 0);
+	static int getAnimationId(int toRight, int objID, int state, int form=0);
 	static void alignAnimationPosition(int* x, int* y);
 	static float getAcceleratedSpeed(float currentSpeed, float acclerator, float target);
 	static bool equalTo(float num1, float num2);
+	static int getTileId(int row, int col, int* left, int* top, int* right, int* bottom, int scale=1);
+	static int getTileId(int row, int col);
+	static int getItemId(int objId, int index);
 };
 
